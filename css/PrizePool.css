@@ -302,9 +302,14 @@ body {
 }
 
 /* Lower Positions Grid - 2 Columns */
-.lower-positions-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.sixth-container {
+  display: flex;
+  justify-content: center;
+}
+
+.sixth {
+  width: calc(50% - 12.5px);
+}
   gap: 25px;
   opacity: 0;
   transform: translateY(30px);
