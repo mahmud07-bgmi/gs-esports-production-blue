@@ -31,6 +31,7 @@ body {
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 999;
 }
 
 /* 🔥 MAIN CARD */
@@ -40,9 +41,12 @@ body {
   border: 2px solid var(--gold);
   background: linear-gradient(135deg, var(--bg-light), var(--bg-dark));
   overflow: hidden;
-  animation: slideIn .7s ease forwards;
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
   position: relative;
+
+  animation: cardEntry 0.7s cubic-bezier(.17,.67,.83,.67) forwards,
+             glowPulse 1.8s ease-in-out infinite alternate;
+
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
 }
 
 /* ✨ TOP GLOW LINE */
@@ -54,6 +58,26 @@ body {
   width: 100%;
   height: 3px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  z-index: 2;
+}
+
+/* ✨ SHINE SWEEP */
+.elim-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.22),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: shineMove 2.4s linear infinite;
+  z-index: 1;
 }
 
 /* 📦 CONTENT */
@@ -62,6 +86,8 @@ body {
   align-items: center;
   padding: 20px;
   gap: 20px;
+  position: relative;
+  z-index: 3;
 }
 
 /* 🖼️ TEAM LOGO */
@@ -73,6 +99,7 @@ body {
   border: 3px solid var(--gold);
   background: #0F172A;
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+  animation: logoPop 0.5s ease-out;
 }
 
 /* 📝 TEXT AREA */
@@ -80,6 +107,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  animation: textFadeUp 0.6s ease-out;
 }
 
 /* 🚫 ELIMINATED TEXT */
@@ -89,6 +117,7 @@ body {
   color: var(--accent);
   letter-spacing: 3px;
   text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(51, 204, 255, 0.35);
 }
 
 /* 👑 TEAM NAME */
@@ -111,30 +140,96 @@ body {
   height: 2px;
   width: 80%;
   background: linear-gradient(90deg, var(--accent), transparent);
+  animation: dividerGrow 0.6s ease-out;
+  transform-origin: left;
 }
 
-/* 🎬 ANIMATION */
-@keyframes slideIn {
-  from {
+/* 🎬 ENTRY */
+@keyframes cardEntry {
+  0% {
     opacity: 0;
-    transform: translateY(-80px);
+    transform: translateY(-90px) scale(0.92);
   }
-  to {
+  60% {
+    opacity: 1;
+    transform: translateY(8px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 🔥 GLOW PULSE */
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25),
+                0 0 8px rgba(255, 215, 0, 0.18);
+  }
+  100% {
+    box-shadow: 0 10px 28px rgba(37, 99, 235, 0.4),
+                0 0 18px rgba(255, 215, 0, 0.45);
+  }
+}
+
+/* ✨ SHINE MOVE */
+@keyframes shineMove {
+  0% {
+    left: -120%;
+  }
+  100% {
+    left: 140%;
+  }
+}
+
+/* 🖼️ LOGO POP */
+@keyframes logoPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 📝 TEXT FADE */
+@keyframes textFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
+/* 🔹 DIVIDER GROW */
+@keyframes dividerGrow {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* ❌ EXIT */
 .slide-out {
-  animation: slideOut .6s ease forwards;
+  animation: slideOut 0.6s ease forwards !important;
 }
 
 @keyframes slideOut {
-  from {
+  0% {
     opacity: 1;
+    transform: translateY(0) scale(1);
   }
-  to {
+  100% {
     opacity: 0;
-    transform: translateY(-80px);
+    transform: translateY(-80px) scale(0.92);
   }
 }
