@@ -8,12 +8,14 @@
   src: url('../font/American Captain Patrius 02 FRE.otf');
 }
 
+/* 🎨 THEME COLORS */
 :root {
-  --bg-light: #800000;
-  --bg-white: #800000;
-  --accent: #D00000;
-  --accent-dark: #8B0000;
-  --text: #1A0000;
+  --bg-dark: #0A1630;
+  --bg-light: #0B1E3A;
+  --accent: #2563EB;
+  --accent-dark: #1E40AF;
+  --gold: #FFD700;
+  --text: #E5E7EB;
 }
 
 body {
@@ -23,6 +25,7 @@ body {
   font-family: 'MicrogrammaD', sans-serif;
 }
 
+/* 📍 POSITION */
 #elim-card-container {
   position: absolute;
   top: 20px;
@@ -30,16 +33,30 @@ body {
   transform: translateX(-50%);
 }
 
+/* 🔥 MAIN CARD */
 .elim-card {
   width: 520px;
-  border-radius: 12px;
-  border: 2px solid var(--accent);
-  background: linear-gradient(135deg, var(--bg-light), var(--bg-white));
+  border-radius: 14px;
+  border: 2px solid var(--gold);
+  background: linear-gradient(135deg, var(--bg-light), var(--bg-dark));
   overflow: hidden;
   animation: slideIn .7s ease forwards;
-  box-shadow: 0 6px 20px rgba(208,0,0,0.25);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+  position: relative;
 }
 
+/* ✨ TOP GLOW LINE */
+.elim-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* 📦 CONTENT */
 .elim-content {
   display: flex;
   align-items: center;
@@ -47,47 +64,56 @@ body {
   gap: 20px;
 }
 
+/* 🖼️ TEAM LOGO */
 .team-logo {
   width: 110px;
   height: 110px;
   object-fit: contain;
   border-radius: 10px;
-  border: 3px solid var(--accent-dark);
-  background: #FFD6D6;
+  border: 3px solid var(--gold);
+  background: #0F172A;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
 }
 
+/* 📝 TEXT AREA */
 .text-content {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
+/* 🚫 ELIMINATED TEXT */
 .eliminated-text {
   font-family: 'AmericanCaptain';
   font-size: 18px;
-  color:#FFFFFF;
+  color: var(--accent);
   letter-spacing: 3px;
   text-transform: uppercase;
 }
 
+/* 👑 TEAM NAME */
 .team-name {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 900;
-  color:#FFD700;
+  color: var(--gold);
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
 }
 
+/* 💀 FINISHES */
 .team-finishes {
   font-size: 20px;
   font-weight: 800;
-  color:#FFFFFF;
+  color: var(--text);
 }
 
+/* 🔹 DIVIDER */
 .divider-line {
   height: 2px;
   width: 80%;
-  background: linear-gradient(90deg, var(--accent-dark), transparent);
+  background: linear-gradient(90deg, var(--accent), transparent);
 }
 
+/* 🎬 ANIMATION */
 @keyframes slideIn {
   from {
     opacity: 0;
