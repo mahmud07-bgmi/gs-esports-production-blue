@@ -11,29 +11,33 @@ body, .table-alive, .alive-rectangles, .table-alive th, .table-alive td {
   font-family: 'Gonstet', 'Montserrat', Arial, sans-serif !important;
 }
 
+/* 🔵 Blue Zone Blink Effect */
 @keyframes blink-blue-bg {
   0%, 100% { background-color: inherit; }
-  50% { background-color: #0284C744; }
+  50% { background-color: rgba(37, 99, 235, 0.25); }
 }
 tr.bluezone-blink {
   animation: blink-blue-bg 1s linear infinite !important;
 }
 
+/* 🔥 MAIN TABLE */
 .table-alive {
   border-collapse: separate;
   border-spacing: 0;
   width: 360px;
   margin: 40px auto;
-  background: #FFFFFF;
-  color: #0F172A;
-  font-family: 'Montserrat', Arial, sans-serif;
+  background: linear-gradient(180deg, #0B1E3A 0%, #0A1630 100%);
+  color: #E5E7EB;
   font-size: 18px;
   overflow: hidden;
-  border: 2px solid #B30000;
+  border: 2px solid #FFD700;
+  box-shadow: 0 0 20px rgba(0, 102, 255, 0.4);
   position: relative;
 }
+
+/* 🔷 HEADER */
 .table-alive thead tr {
-  background: linear-gradient(90deg, #D00000 0%, #8B0000 100%);
+  background: linear-gradient(90deg, #1E3A8A 0%, #2563EB 100%);
   height: 48px;
 }
 .table-alive th {
@@ -50,14 +54,21 @@ tr.bluezone-blink {
   text-align: left;
   padding-left: 16px;
 }
+
+/* 🧊 ROWS */
 .table-alive tbody tr {
   height: 50px;
-  background: #FFFFFF;
+  background: rgba(255, 255, 255, 0.02);
   transition: background 0.3s;
 }
 .table-alive tbody tr:nth-child(even) {
-  background: #F3E1E1;
+  background: rgba(37, 99, 235, 0.08);
 }
+.table-alive tbody tr:hover {
+  background: rgba(59, 130, 246, 0.15);
+}
+
+/* 🔤 TEXT */
 .table-alive td {
   text-align: center;
   font-weight: 600;
@@ -67,9 +78,11 @@ tr.bluezone-blink {
   position: relative;
   padding: 0;
   vertical-align: middle;
-  color: #B30000;
+  color: #FFD700;
   height: 50px;
 }
+
+/* 👥 TEAM COLUMN */
 .table-alive td.team {
   display: flex;
   align-items: center;
@@ -77,7 +90,7 @@ tr.bluezone-blink {
   padding-left: 16px;
   padding-right: 16px;
   text-align: left;
-  color: #0F172A;
+  color: #FFFFFF;
   height: 50px;
 }
 .table-alive td.team img {
@@ -85,10 +98,12 @@ tr.bluezone-blink {
   height: 32px;
   border-radius: 6px;
   object-fit: contain;
-  background: #EBF8FF;
-  border: 2px solid #B30000;
+  background: #0F172A;
+  border: 2px solid #FFD700;
   flex-shrink: 0;
 }
+
+/* 🟦 ALIVE BARS */
 .alive-rectangles {
   display: flex;
   gap: 3px;
@@ -101,22 +116,26 @@ tr.bluezone-blink {
 .alive-rect-bar {
   width: 5px;
   height: 30px;
-  background: #D00000;
-  border: 1px solid #8B0000;
+  background: linear-gradient(180deg, #3B82F6, #1D4ED8);
+  border: 1px solid #1E40AF;
 }
 .alive-rect-bar.dead {
-  background: #FAD4D4;
-  border: 1px solid #E5A3A3;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
 }
+
+/* ❌ STRIKE LINE */
 .alive-rect-strike {
   position: absolute;
   left: 0;
   right: 0;
   top: 50%;
   height: 0;
-  border-top: 3px solid #D00000;
+  border-top: 3px solid #FFD700;
   z-index: 2;
 }
+
+/* 🌌 BODY */
 body {
   background: transparent;
   min-height: 100vh;
@@ -124,6 +143,8 @@ body {
   padding: 0;
   overflow: hidden;
 }
+
+/* 🎬 SLIDE ANIMATION */
 .table-container {
   position: absolute;
   right: 0;
@@ -136,10 +157,11 @@ body {
 .slide-out {
   transform: translateX(500px);
 }
+
+/* ⚠️ STATES */
 #loading, #error, #nodata {
-  color: #0F172A;
-  font-family: 'Montserrat', Arial, sans-serif;
+  color: #FFFFFF;
   text-align: center;
   margin-top: 40px;
   font-size: 22px;
-} 
+}
