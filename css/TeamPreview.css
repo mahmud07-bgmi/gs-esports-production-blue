@@ -25,13 +25,17 @@
 }
 
 :root {
-  --espresso-black: #EBF8FF;
-  --dark-brown: #FFFFFF;
-  --shadow-brown: #DBEAFE;
-  --gold-bright: #0284C7;
-  --gold-warm: #0369A1;
-  --gold-burnt: #075985;
-  --text-light: #0F172A;
+  --bg-light: #F8FAFC;
+  --bg-light-2: #E2E8F0;
+  --card-blue: #1E3A8A;
+  --card-blue-2: #0F2A5C;
+  --card-blue-3: #2563EB;
+  --gold-bright: #FFD700;
+  --gold-warm: #FFC300;
+  --gold-burnt: #B8860B;
+  --text-light: #FFFFFF;
+  --title-blue: #1E3A8A;
+  --title-blue-2: #3B82F6;
 }
 
 * {
@@ -46,7 +50,21 @@ body {
   width: 1920px;
   height: 1080px;
   position: relative;
-  background: var(--espresso-black);
+  background: linear-gradient(135deg, var(--bg-light), var(--bg-light-2));
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(59,130,246,0.14), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(30,58,138,0.14), transparent 45%),
+    linear-gradient(rgba(30, 64, 175, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 64, 175, 0.05) 1px, transparent 1px);
+  background-size: auto, auto, 42px 42px, 42px 42px;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .overlay-content {
@@ -77,15 +95,18 @@ body {
   font-family: 'MicrogrammaD', 'AmericanCaptain', 'ODIN', 'Montserrat', Arial, sans-serif;
   font-size: 6rem;
   font-weight: 900;
-  color: var(--gold-bright);
   text-align: center;
   margin-bottom: 80px;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
   letter-spacing: 12px;
   position: relative;
   margin-top: 40px;
   opacity: 0;
   animation: titleSlideDown 0.8s ease-out 0.3s forwards;
+  background: linear-gradient(45deg, var(--title-blue), var(--title-blue-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 18px rgba(59, 130, 246, 0.35);
 }
 
 @keyframes titleSlideDown {
@@ -107,8 +128,9 @@ body {
   transform: translateX(-50%) scaleX(0);
   width: 400px;
   height: 6px;
-  background: linear-gradient(90deg, var(--gold-bright), var(--gold-warm), var(--gold-burnt));
+  background: linear-gradient(90deg, var(--title-blue), var(--title-blue-2), var(--title-blue));
   border-radius: 3px;
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.45);
   animation: underlineGrow 0.8s ease-out 0.8s forwards;
 }
 
@@ -134,7 +156,7 @@ body {
 }
 
 .team-card {
-  background: linear-gradient(135deg, var(--dark-brown) 0%, var(--shadow-brown) 100%);
+  background: linear-gradient(135deg, var(--card-blue-3) 0%, var(--card-blue) 55%, var(--card-blue-2) 100%);
   border: 3px solid var(--gold-bright);
   border-radius: 16px;
   padding: 30px 20px;
@@ -144,7 +166,9 @@ body {
   gap: 20px;
   width: 260px;
   height: 240px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  box-shadow:
+    0 10px 24px rgba(15, 42, 92, 0.28),
+    0 0 18px rgba(59, 130, 246, 0.18);
   justify-content: center;
   position: relative;
   overflow: hidden;
@@ -152,7 +176,6 @@ body {
   animation: cardFadeIn 0.6s ease-out forwards;
 }
 
-/* Sharp, crisp entrance animation */
 @keyframes cardFadeIn {
   0% {
     opacity: 0;
@@ -164,7 +187,6 @@ body {
   }
 }
 
-/* Staggered animation delays */
 .team-card:nth-child(1) { animation-delay: 0.1s; }
 .team-card:nth-child(2) { animation-delay: 0.15s; }
 .team-card:nth-child(3) { animation-delay: 0.2s; }
@@ -184,15 +206,21 @@ body {
 .team-card:nth-child(17) { animation-delay: 0.9s; }
 .team-card:nth-child(18) { animation-delay: 0.95s; }
 
-/* Gold accent line at top of card */
 .team-card::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0 auto auto 0;
+  width: 100%;
   height: 4px;
   background: linear-gradient(90deg, var(--gold-bright), var(--gold-warm));
+}
+
+.team-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), transparent 35%);
+  pointer-events: none;
 }
 
 .team-logo {
@@ -200,12 +228,12 @@ body {
   height: 100px;
   border-radius: 12px;
   object-fit: contain;
-  background: var(--espresso-black);
+  background: rgba(248, 250, 252, 0.96);
   border: 3px solid var(--gold-warm);
   padding: 8px;
   flex-shrink: 0;
   position: relative;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.35);
 }
 
 .team-name {
@@ -215,7 +243,7 @@ body {
   color: var(--text-light);
   text-align: center;
   letter-spacing: 2px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
   word-wrap: break-word;
   max-width: 100%;
   line-height: 1.2;
@@ -223,7 +251,6 @@ body {
   position: relative;
 }
 
-/* Handle different grid layouts based on team count */
 .teams-grid.teams-1 { grid-template-columns: 1fr; }
 .teams-grid.teams-2 { grid-template-columns: repeat(2, 1fr); }
 .teams-grid.teams-3 { grid-template-columns: repeat(3, 1fr); }
@@ -242,7 +269,6 @@ body {
 .teams-grid.teams-16 { grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(3, 1fr); }
 .teams-grid.teams-18 { grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(3, 1fr); }
 
-/* Adjust card size for more teams */
 .teams-grid.teams-9 .team-card,
 .teams-grid.teams-10 .team-card,
 .teams-grid.teams-12 .team-card {
@@ -277,20 +303,19 @@ body {
   font-size: 1.5rem;
 }
 
-/* Error and No Data Messages */
 #error, #nodata {
   color: var(--text-light);
   font-family: 'MicrogrammaD', 'AmericanCaptain', 'Montserrat', Arial, sans-serif;
   text-align: center;
   font-size: 2.5rem;
   font-weight: 600;
-  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.8);
-  background: linear-gradient(135deg, var(--dark-brown), var(--shadow-brown));
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, var(--card-blue) 0%, var(--card-blue-2) 100%);
   padding: 50px 80px;
   border-radius: 20px;
   border: 3px solid var(--gold-bright);
   max-width: 800px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 8px 24px rgba(15, 42, 92, 0.28);
 }
 
 #error {
@@ -298,22 +323,21 @@ body {
   border-color: #ff6b6b;
 }
 
-/* Responsive adjustments */
 @media (max-width: 1800px) {
   .teams-grid {
     gap: 25px;
   }
-  
+
   .team-card {
     width: 240px;
     height: 220px;
   }
-  
+
   .team-logo {
     width: 90px;
     height: 90px;
   }
-  
+
   .team-name {
     font-size: 1.6rem;
   }
@@ -323,22 +347,22 @@ body {
   .teams-grid {
     gap: 20px;
   }
-  
+
   .team-card {
     width: 220px;
     height: 200px;
     padding: 25px 15px;
   }
-  
+
   .team-logo {
     width: 80px;
     height: 80px;
   }
-  
+
   .team-name {
     font-size: 1.4rem;
   }
-  
+
   .main-title {
     font-size: 5rem;
   }
