@@ -305,15 +305,13 @@ body {
 .sixth-container {
   display: flex;
   justify-content: center;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: middleLoop 40s infinite;
 }
 
 .sixth {
   width: calc(50% - 12.5px);
-}
-  gap: 25px;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: lowerLoop 40s infinite;
 }
 
 @keyframes lowerLoop {
@@ -390,7 +388,7 @@ body {
 .second-runner { animation: runnerUpLoop 40s infinite; }
 .fourth { animation: middleLoop 40s infinite; }
 .fifth { animation: middleLoop 40s infinite; }
-.sixth { animation: lowerLoop 40s infinite; }
+.sixth { animation: middleLoop 40s infinite; }
 .seventh { animation: lowerLoop 40s infinite; }
 .mvp { animation: rewardsLoop 40s infinite; }
 .fan-favorite { animation: rewardsLoop 40s infinite; }
