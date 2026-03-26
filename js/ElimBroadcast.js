@@ -1,4 +1,3 @@
-// CONFIG: Set your Google Sheet URL here (published to web, not private)
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/1gyzPFtG3ubxzrqGEtQI-dr4aiExDU6Fx0tzFS2W4iG8/";
 
 // Convert sheet URL to JSON API
@@ -24,7 +23,6 @@ let running = false;
 
 // Create card
 function showCard(data) {
-
   const container = document.getElementById("elim-card-container");
 
   if (!data) {
@@ -33,42 +31,32 @@ function showCard(data) {
   }
 
   container.innerHTML = `
-<div id="elim-card" class="elim-card">
+    <div id="elim-card" class="elim-card">
+      <div class="gold-accent-bar" id="goldBar"></div>
 
-  <div class="gold-accent-bar" id="goldBar"></div>
+      <div class="elim-content">
+        <div class="team-logo-container" id="logoContainer">
+          <img src="${data.logo}" class="team-logo" onerror="this.style.display='none'">
+        </div>
 
-  <div class="elim-content">
-
-    <div class="team-logo-container" id="logoContainer">
-      <img src="${data.logo}" class="team-logo" onerror="this.style.display='none'">
+        <div class="text-content">
+          <div class="eliminated-text" id="elimText">TEAM ELIMINATED</div>
+          <div class="team-name" id="teamName">${data.name}</div>
+          <div class="divider-line" id="dividerLine"></div>
+          <div class="team-finishes" id="teamFinishes">FINISHES: ${data.finishes}</div>
+        </div>
+      </div>
     </div>
-
-    <div class="text-content">
-
-      <div class="eliminated-text" id="elimText">TEAM ELIMINATED</div>
-
-      <div class="team-name" id="teamName">${data.name}</div>
-
-      <div class="divider-line" id="dividerLine"></div>
-
-      <div class="team-finishes" id="teamFinishes">FINISHES: ${data.finishes}</div>
-
-    </div>
-
-  </div>
-
-</div>
-`;
+  `;
 }
 
 // Play animation
 async function play(data) {
-
   showCard(data);
 
   await new Promise(r => setTimeout(r, 3500));
 
-  const card = document.getElementById("card");
+  const card = document.getElementById("elim-card");
 
   if (card) {
     card.classList.add("slide-out");
@@ -77,41 +65,33 @@ async function play(data) {
   await new Promise(r => setTimeout(r, 600));
 
   showCard(null);
-
 }
 
 // Queue system
 async function processQueue() {
-
   if (running) return;
 
   running = true;
 
   while (queue.length > 0) {
-
     const team = queue.shift();
-
     await play(team);
 
     if (queue.length > 0) {
       await new Promise(r => setTimeout(r, 500));
     }
-
   }
 
   running = false;
-
 }
 
 // Fetch data from sheet
 function fetchData() {
-
   const url = getGvizUrl(SHEET_URL);
 
   fetch(url)
     .then(res => res.text())
     .then(text => {
-
       const json = JSON.parse(
         text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1)
       );
@@ -129,33 +109,27 @@ function fetchData() {
       const finishIdx = idx("finish_points");
 
       table.rows.forEach(row => {
-
         const name = row[nameIdx];
         const logo = row[logoIdx];
         const alive = parseInt(row[aliveIdx]) || 0;
         const finishes = row[finishIdx] || 0;
 
         if (prevAlive[name] > 0 && alive === 0) {
-
           queue.push({
             name: name,
             logo: logo,
             finishes: finishes
           });
-
         }
 
         prevAlive[name] = alive;
-
       });
 
       processQueue();
-
     })
     .catch(err => {
       console.log("Sheet error:", err);
     });
-
 }
 
 // Initial fetch
