@@ -12,11 +12,13 @@ body, .top-alive-status, .team-card, .team-info, .team-name, .team-finishes, .te
 }
 
 .top-alive-status {
-  background: #EBF8FF;
-  border-radius: 8px;
+  background: rgba(8, 15, 30, 0.88);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  border-radius: 12px;
   padding: 16px;
   margin: 16px 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+  backdrop-filter: blur(6px);
 }
 
 .top-alive-status-cards-wrapper {
@@ -44,10 +46,10 @@ body, .top-alive-status, .team-card, .team-info, .team-name, .team-finishes, .te
 }
 
 .team-card {
-  background: #FFFFFF;
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(2, 132, 199, 0.2);
-  border: 2px solid #B30000;
+  background: linear-gradient(135deg, #101a33 0%, #0b1224 100%);
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  border: 2px solid #22D3EE;
   padding: 12px 10px 10px 10px;
   display: flex;
   flex-direction: row;
@@ -57,6 +59,10 @@ body, .top-alive-status, .team-card, .team-info, .team-name, .team-finishes, .te
   position: relative;
   transition: box-shadow 0.3s, transform 0.3s, opacity 0.4s;
   flex-shrink: 0;
+}
+
+.team-card:hover {
+  box-shadow: 0 10px 32px rgba(34, 211, 238, 0.22);
 }
 
 .team-card.eliminating {
@@ -70,13 +76,13 @@ body, .top-alive-status, .team-card, .team-info, .team-name, .team-finishes, .te
   position: absolute;
   top: 6px;
   left: 6px;
-  background: #D00000;
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #FFD700 0%, #F59E0B 100%);
+  color: #111827;
   font-weight: 900;
   font-size: 1.6rem;
   border-radius: 8px;
   padding: 6px 18px;
-  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.5);
+  box-shadow: 0 2px 10px rgba(255, 215, 0, 0.35);
   z-index: 2;
   letter-spacing: 1px;
 }
@@ -85,10 +91,12 @@ body, .top-alive-status, .team-card, .team-info, .team-name, .team-finishes, .te
   width: 125px;
   height: 125px;
   object-fit: contain;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-right: 18px;
   margin-left: 8px;
-  box-shadow: 0 2px 8px rgba(3, 105, 161, 0.4);
+  background: rgba(255,255,255,0.04);
+  border: 2px solid rgba(34, 211, 238, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
   flex-shrink: 0;
 }
 
@@ -103,7 +111,7 @@ body, .top-alive-status, .team-card, .team-info, .team-name, .team-finishes, .te
 .team-name {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #0F172A;
+  color: #F8FAFC;
   margin-bottom: 10px;
   text-align: left;
   line-height: 1.1;
@@ -113,9 +121,10 @@ body, .top-alive-status, .team-card, .team-info, .team-name, .team-finishes, .te
 .team-finishes {
   font-size: 1.4rem;
   font-weight: 800;
-  color: #D00000;
+  color: #FFD700;
   margin-bottom: 10px;
   text-align: left;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.18);
 }
 
 .team-alive-section {
@@ -129,7 +138,7 @@ body, .top-alive-status, .team-card, .team-info, .team-name, .team-finishes, .te
 .top-alive-label {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #D00000;
+  color: #22D3EE;
   margin-right: 4px;
 }
 
@@ -147,14 +156,14 @@ body, .top-alive-status, .team-card, .team-info, .team-name, .team-finishes, .te
   height: 30px;
   background: url('../assets/helmet.png') no-repeat center center;
   background-size: contain;
-  filter: brightness(1.5) saturate(3) hue-rotate(180deg) sepia(0.6) contrast(1.2);
+  filter: brightness(1.35) saturate(2.2) hue-rotate(155deg) contrast(1.15);
   opacity: 1;
   transition: all 0.3s ease;
 }
 
 .top-alive-rect-bar.dead {
-  filter: brightness(0.3) saturate(1.2) hue-rotate(0deg) sepia(1) contrast(0.8);
-  opacity: 0.8;
+  filter: grayscale(1) brightness(0.42) contrast(0.9);
+  opacity: 0.55;
 }
 
 /* WWCD Percentage Rectangle */
@@ -163,14 +172,14 @@ body, .top-alive-status, .team-card, .team-info, .team-name, .team-finishes, .te
   bottom: -25px;
   left: 50%;
   transform: translateX(-50%);
-  background: #D00000;
-  border: 2px solid #8B0000;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
+  border: 2px solid #22D3EE;
+  border-radius: 10px;
   padding: 4px 12px;
   display: flex;
   align-items: center;
   gap: 6px;
-  box-shadow: 0 2px 8px rgba(200, 0, 0, 0.35);
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.32);
   min-width: 80px;
   justify-content: center;
 }
@@ -185,6 +194,6 @@ body, .top-alive-status, .team-card, .team-info, .team-name, .team-finishes, .te
 .wwcd-value {
   font-size: 1.1rem;
   font-weight: 900;
-  color: #FFFFFF;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  color: #FFD700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
