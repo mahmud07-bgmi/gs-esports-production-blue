@@ -183,12 +183,12 @@ body {
   width: 400px;
   height: 400px;
   border-radius: 20px;
-  background: linear-gradient(135deg,#7a0000,#020617);
+  background: linear-gradient(135deg,#0B1E3A,#020617);
   border: 6px solid var(--gold-bright);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+  box-shadow:    0 12px 40px rgba(0, 0, 0, 0.8),   0 0 30px rgba(34, 211, 238, 0.3);
   position: relative;
   overflow: hidden;
   animation: logoBorderPulse 2s ease infinite;
@@ -197,7 +197,7 @@ body {
 @keyframes logoBorderPulse {
   0%, 100% {
     border-color: var(--gold-bright);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+    box-shadow:    0 12px 40px rgba(0, 0, 0, 0.8),   0 0 30px rgba(34, 211, 238, 0.3);
   }
   50% {
     border-color: var(--gold-warm);
