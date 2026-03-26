@@ -19,9 +19,9 @@
 }
 
 :root {
-   --espresso-black: #4b0000;
-  --dark-brown: #7a0000;
-  --shadow-brown: #990000;
+   --espresso-black: #020617;
+  --dark-brown: #0B1E3A;
+  --shadow-brown: #1E3A8A;
   --gold-bright: #FFD700;
   --gold-warm: #FFC300;
   --gold-burnt: #B8860B;
@@ -40,7 +40,7 @@ body {
   overflow: hidden;
   font-family: 'D-DINCondensed', 'MicrogrammaD', sans-serif;
   position: relative;
-  background: linear-gradient(180deg, #7a0000 0%, #4b0000 100%);
+  background: linear-gradient(180deg, #0B1E3A 0%, #020617 100%);
 }
 
 /* Main Container */
@@ -120,7 +120,7 @@ body {
 /* First MVP Card Special Styling */
 .mvp-card:first-child {
   border: 3px solid var(--gold-bright);
-  box-shadow: 0 8px 32px rgba(2, 132, 199, 0.4);
+  box-shadow: 0 8px 32px rgba(34, 211, 238, 0.4);
 }
 
 /* Card Rank Badge */
