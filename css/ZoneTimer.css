@@ -1,0 +1,188 @@
+@font-face {
+  font-family: 'ODIN';
+  src: url('../font/ODIN.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MicrogrammaD';
+  src: url('../font/Microgramma D Extended Bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'AmericanCaptain';
+  src: url('../font/American Captain Patrius 02 FRE.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'DoubleSquare';
+  src: url('../font/DoubleSquare.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+  font-family: 'AmericanCaptain', 'MicrogrammaD', 'ODIN', 'DoubleSquare', Arial, sans-serif;
+}
+
+#zone-timer-container {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  width: 600px;
+  height: 80px;
+  z-index: 1000;
+  transition: transform 0.5s ease-in-out;
+}
+
+.zone-timer-visible {
+  transform: translateX(-50%) translateY(0);
+}
+
+.zone-rectangle {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  background: #D00000;
+  overflow: hidden;
+}
+
+.zone-fill {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0%;
+  height: 100%;
+  background: #5A0000;
+  transition: width 0.1s linear;
+  z-index: 1;
+}
+
+.zone-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-family: 'AmericanCaptain', 'MicrogrammaD', 'ODIN', 'DoubleSquare', Arial, sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  letter-spacing: 2px;
+  z-index: 2;
+}
+
+#countdown {
+  font-size: 28px;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  margin: 0 8px;
+}
+
+/* Slide down animation */
+@keyframes slideDown {
+  from {
+    transform: translateX(-50%) translateY(-100%);
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Slide up animation */
+@keyframes slideUp {
+  from {
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    transform: translateX(-50%) translateY(-100%);
+  }
+}
+
+/* Fill animation from right to left (initial phase) */
+@keyframes fillRightToLeft {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Fill animation from left to right (countdown phase) */
+@keyframes fillLeftToRight {
+  from {
+    width: 100%;
+    right: 0;
+    left: auto;
+  }
+  to {
+    width: 0%;
+    right: 0;
+    left: auto;
+  }
+}
+
+.zone-slide-down {
+  animation: slideDown 0.5s ease-out forwards;
+}
+
+.zone-slide-up {
+  animation: slideUp 0.5s ease-in forwards;
+}
+
+.zone-fill-initial {
+  animation: fillRightToLeft 0.5s ease-out forwards;
+}
+
+.zone-fill-countdown {
+  right: 0;
+  left: auto;
+  width: 100%;
+}
+
+/* Error styles */
+#error {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-family: 'MicrogrammaD', 'AmericanCaptain', 'ODIN', Arial, sans-serif;
+  font-size: 18px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid #D00000;
+}
+
+/* Pulsing effect for active countdown */
+.countdown-active {
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+  50% {
+    text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.6), 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* Keep countdown text white - no urgent styling */
+.countdown-urgent {
+  color: #ffffff !important;
+  animation: pulse 1s ease-in-out infinite;
+}

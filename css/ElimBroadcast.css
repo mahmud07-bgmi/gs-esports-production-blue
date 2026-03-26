@@ -1,0 +1,114 @@
+@font-face {
+  font-family: 'MicrogrammaD';
+  src: url('../font/Microgramma D Extended Bold.otf');
+}
+
+@font-face {
+  font-family: 'AmericanCaptain';
+  src: url('../font/American Captain Patrius 02 FRE.otf');
+}
+
+:root {
+  --bg-light: #800000;
+  --bg-white: #800000;
+  --accent: #D00000;
+  --accent-dark: #8B0000;
+  --text: #1A0000;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: 'MicrogrammaD', sans-serif;
+}
+
+#elim-card-container {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.elim-card {
+  width: 520px;
+  border-radius: 12px;
+  border: 2px solid var(--accent);
+  background: linear-gradient(135deg, var(--bg-light), var(--bg-white));
+  overflow: hidden;
+  animation: slideIn .7s ease forwards;
+  box-shadow: 0 6px 20px rgba(208,0,0,0.25);
+}
+
+.elim-content {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+.team-logo {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 3px solid var(--accent-dark);
+  background: #FFD6D6;
+}
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eliminated-text {
+  font-family: 'AmericanCaptain';
+  font-size: 18px;
+  color:#FFFFFF;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.team-name {
+  font-size: 26px;
+  font-weight: 900;
+  color:#FFD700;
+}
+
+.team-finishes {
+  font-size: 20px;
+  font-weight: 800;
+  color:#FFFFFF;
+}
+
+.divider-line {
+  height: 2px;
+  width: 80%;
+  background: linear-gradient(90deg, var(--accent-dark), transparent);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-out {
+  animation: slideOut .6s ease forwards;
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+}

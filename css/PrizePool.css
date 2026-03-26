@@ -1,0 +1,444 @@
+@font-face {
+  font-family: 'D-DINCondensed';
+  src: url('../font/D-DINCondensed.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'AmericanCaptain';
+  src: url('../font/American Captain Patrius 02 FRE.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'MicrogrammaD';
+  src: url('../font/Microgramma D Extended Bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'ODIN';
+  src: url('../font/ODIN.otf') format('opentype');
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  font-family: 'D-DINCondensed', 'MicrogrammaD', sans-serif;
+  position: relative;
+  background: #EBF8FF;
+}
+
+/* Video Background */
+#video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  object-fit: cover;
+}
+
+/* Main Container */
+.main-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  z-index: 5;
+  opacity: 0;
+  animation: containerLoop 40s infinite;
+}
+
+@keyframes containerLoop {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  2% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  7.5%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header Section */
+.header-section {
+  text-align: center;
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(-50px);
+  animation: headerLoop 40s infinite;
+}
+
+@keyframes headerLoop {
+  0%, 2.5% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  3.75% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  7.5%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.main-title {
+  font-family: 'Orbitron', 'MicrogrammaD', sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  text-shadow: 3px 3px 0px #075985, 6px 6px 12px rgba(0, 0, 0, 0.4);
+  margin-bottom: 15px;
+  background: linear-gradient(45deg, #0284C7, #0EA5E9);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title-underline {
+  width: 300px;
+  height: 4px;
+  background: linear-gradient(90deg, #0284C7, #0EA5E9, #0284C7);
+  border-radius: 2px;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.5);
+  transform: scaleX(0);
+  animation: underlineLoop 40s infinite;
+}
+
+@keyframes underlineLoop {
+  0%, 3.75% {
+    transform: scaleX(0);
+  }
+  5% {
+    transform: scaleX(1);
+  }
+  7.5%, 100% {
+    transform: scaleX(1);
+  }
+}
+
+/* Content Container */
+.content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Prize Card Base Styles */
+.prize-card, .reward-card {
+  background: linear-gradient(135deg, #38BDF8, #0284C7);
+  border-radius: 15px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  position: relative;
+  overflow: hidden;
+}
+
+.prize-card::before, .reward-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.prize-card:hover::before, .reward-card:hover::before {
+  left: 100%;
+}
+
+/* Position and Reward Labels */
+.position-label, .reward-label {
+  font-family: 'D-DINCondensed', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Prize and Reward Amounts */
+.prize-amount, .reward-amount {
+  font-family: 'Orbitron', 'MicrogrammaD', sans-serif;
+  font-size: 38px;
+  font-weight: 900;
+  color: #FFFFFF;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1.5px;
+}
+
+/* Champion Section - Full Width */
+.champion-section {
+  width: 100%;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: championLoop 40s infinite;
+}
+
+.champion-section .prize-card {
+  background: linear-gradient(135deg, #0EA5E9, #0369A1);
+  min-height: 140px;
+  padding: 30px;
+}
+
+.champion-section .position-label {
+  font-size: 28px;
+  color: #FFFFFF;
+  margin-bottom: 12px;
+}
+
+.champion-section .prize-amount {
+  font-size: 48px;
+  color: #FFFFFF;
+}
+
+@keyframes championLoop {
+  0%, 5% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  6.25% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  7.5%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Runner Up Grid - 2 Columns */
+.runner-up-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: runnerUpLoop 40s infinite;
+}
+
+@keyframes runnerUpLoop {
+  0%, 6.25% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  6.875% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  7.5%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.runner-up-grid .prize-card {
+  min-height: 115px;
+}
+
+/* Middle Positions Grid - 2 Columns */
+.middle-positions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: middleLoop 40s infinite;
+}
+
+@keyframes middleLoop {
+  0%, 6.875% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  7.25% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  7.5%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.middle-positions-grid .prize-card {
+  min-height: 105px;
+}
+
+/* Lower Positions Grid - 2 Columns */
+.lower-positions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: lowerLoop 40s infinite;
+}
+
+@keyframes lowerLoop {
+  0%, 7.25% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  7.375% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  7.5%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lower-positions-grid .prize-card {
+  min-height: 105px;
+}
+
+/* Other Rewards Section - 3 Columns */
+.other-rewards-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  margin-top: 25px;
+  animation: rewardsLoop 40s infinite;
+}
+
+@keyframes rewardsLoop {
+  0%, 7.25% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  7.5% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  7.5%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.other-rewards-section .reward-card {
+  background: linear-gradient(135deg, #0369A1, #075985);
+  min-height: 95px;
+  padding: 22px;
+}
+
+.other-rewards-section .reward-label {
+  font-size: 16px;
+  color: #DBEAFE;
+  margin-bottom: 8px;
+}
+
+.other-rewards-section .reward-amount {
+  font-size: 28px;
+  color: #FFFFFF;
+}
+
+/* Hover Effects */
+.prize-card:hover, .reward-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+/* Individual Animation Delays - Updated for 40s Loop */
+.champion { animation: championLoop 40s infinite; }
+.runner-up { animation: runnerUpLoop 40s infinite; }
+.second-runner { animation: runnerUpLoop 40s infinite; }
+.fourth { animation: middleLoop 40s infinite; }
+.fifth { animation: middleLoop 40s infinite; }
+.sixth { animation: lowerLoop 40s infinite; }
+.seventh { animation: lowerLoop 40s infinite; }
+.mvp { animation: rewardsLoop 40s infinite; }
+.fan-favorite { animation: rewardsLoop 40s infinite; }
+.best-igl { animation: rewardsLoop 40s infinite; }
+
+/* Responsive Design */
+@media (max-width: 1600px) {
+  .content-container {
+    max-width: 1000px;
+    gap: 15px;
+  }
+  
+  .prize-amount, .reward-amount {
+    font-size: 28px;
+  }
+  
+  .position-label, .reward-label {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .main-title {
+    font-size: 36px;
+    letter-spacing: 4px;
+  }
+  
+  .content-container {
+    max-width: 800px;
+  }
+  
+  .other-rewards-section {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .prize-amount {
+    font-size: 24px;
+  }
+  
+  .reward-amount {
+    font-size: 20px;
+  }
+}
+
+/* Animation States */
+.prize-card, .reward-card {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Show animation classes */
+.show .prize-card, .show .reward-card {
+  opacity: 1;
+  transform: translateY(0);
+}

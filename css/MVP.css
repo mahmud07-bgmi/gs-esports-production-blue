@@ -1,0 +1,338 @@
+@font-face {
+  font-family: 'D-DINCondensed';
+  src: url('../font/D-DINCondensed.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'AmericanCaptain';
+  src: url('../font/American Captain Patrius 02 FRE.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'MicrogrammaD';
+  src: url('../font/Microgramma D Extended Bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'ODIN';
+  src: url('../font/ODIN.otf') format('opentype');
+}
+
+:root {
+   --espresso-black: #4b0000;
+  --dark-brown: #7a0000;
+  --shadow-brown: #990000;
+  --gold-bright: #FFD700;
+  --gold-warm: #FFC300;
+  --gold-burnt: #B8860B;
+  --text-light: #FFFFFF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+    width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  font-family: 'D-DINCondensed', 'MicrogrammaD', sans-serif;
+  position: relative;
+  background: linear-gradient(180deg, #7a0000 0%, #4b0000 100%);
+}
+
+/* Main Container */
+.main-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px 40px 40px;
+  z-index: 5;
+  opacity: 1;
+}
+
+/* Header Section */
+.header-section {
+  text-align: center;
+  margin-bottom: 60px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.main-title {
+  font-family: 'MicrogrammaD', sans-serif;
+  font-size: 72px;
+  font-weight: 900;
+  color: var(--gold-bright);
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+  margin-bottom: 20px;
+}
+
+.title-underline {
+  width: 400px;
+  height: 6px;
+  background: linear-gradient(90deg, var(--gold-bright), var(--gold-warm), var(--gold-burnt));
+  border-radius: 0;
+  margin: 0 auto;
+  transform: scaleX(1);
+}
+
+/* MVP Cards Container */
+.mvp-cards-container {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  max-width: 1700px;
+  width: 100%;
+  justify-content: center;
+  align-items: stretch;
+}
+
+/* MVP Card */
+.mvp-card {
+  position: relative;
+  background: linear-gradient(135deg, var(--dark-brown) 0%, var(--shadow-brown) 100%);
+  border: 3px solid var(--gold-bright);
+  border-radius: 0;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 380px;
+  height: 750px;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* First MVP Card Special Styling */
+.mvp-card:first-child {
+  border: 3px solid var(--gold-bright);
+  box-shadow: 0 8px 32px rgba(2, 132, 199, 0.4);
+}
+
+/* Card Rank Badge */
+.card-rank {
+  position: absolute;
+  top: -15px;
+  right: 20px;
+  background: linear-gradient(180deg, #FFD700 0%, #B8860B 100%);
+  border-radius: 0;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(242, 169, 0, 0.4);
+  z-index: 10;
+  border: 2px solid #FFC300;
+}
+
+.rank-label {
+  font-family: 'MicrogrammaD', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+/* Player Avatar */
+.player-avatar {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  margin: 40px 0 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.character-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  border: 4px solid var(--gold-warm);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.crown-icon {
+  position: absolute;
+  top: -25px;
+  right: -20px;
+  font-size: 56px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+  animation: crownFloat 3s ease-in-out infinite;
+}
+
+@keyframes crownFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(-8deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(8deg);
+  }
+}
+
+/* Player Info */
+.player-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.team-name {
+  font-family: 'D-DINCondensed', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.player-name {
+  font-family: 'MicrogrammaD', sans-serif;
+  font-size: 25px;
+  font-weight: 900;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 20px 0;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  line-height: 1.2;
+  word-break: break-word;
+  padding: 0 10px;
+}
+
+/* Stats Container */
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.stat-item {
+  background: rgba(0,0,0,0.4);
+  border-radius: 0;
+  padding: 18px;
+  border: 2px solid #FFD700;
+  width: 100%;
+}
+
+.stat-label {
+  display: block;
+  font-family: 'D-DINCondensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold-warm);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  display: block;
+  font-family: 'MicrogrammaD', sans-serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--text-light);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Card Glow Effect - Removed (no hover effects) */
+.card-glow {
+  display: none;
+}
+
+/* Loading State */
+.loading {
+  color: var(--gold-burnt);
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* Hide card initially */
+.hide-card {
+  opacity: 0;
+  transform: translateY(50px) scale(0.9);
+}
+
+/* Responsive Design */
+@media (max-width: 1800px) {
+  .mvp-cards-container {
+    gap: 25px;
+  }
+  
+  .mvp-card {
+    width: 350px;
+    height: 720px;
+  }
+  
+  .main-title {
+    font-size: 64px;
+    letter-spacing: 6px;
+  }
+}
+
+@media (max-width: 1500px) {
+  .mvp-cards-container {
+    gap: 20px;
+  }
+  
+  .mvp-card {
+    width: 320px;
+    height: 680px;
+    padding: 25px 15px;
+  }
+  
+  .player-avatar {
+    width: 150px;
+    height: 150px;
+    margin: 30px 0 20px 0;
+  }
+  
+  .player-name {
+    font-size: 28px;
+  }
+  
+  .stat-value {
+    font-size: 30px;
+  }
+  
+  .main-title {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .mvp-cards-container {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .mvp-card {
+    width: 45%;
+    min-width: 350px;
+  }
+}
