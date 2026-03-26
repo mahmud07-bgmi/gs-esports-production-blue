@@ -139,7 +139,7 @@ radial-gradient(circle at 50% 50%, rgba(14,165,233,0.15) 0%, transparent 70%);
 
 /* First Place Block */
 .first-place-block {
-  background: linear-gradient(135deg, #0B1E3A 0%, #2a0000 100%);
+  background: linear-gradient(135deg, #0B1E3A 0%, #020617 100%);
   border: 3px solid #FFD700;
   border-radius: 0;
   padding: 22px 25px;
@@ -278,7 +278,7 @@ radial-gradient(circle at 50% 50%, rgba(14,165,233,0.15) 0%, transparent 70%);
 /* Second Block (Teams 2-6) and Third Block (Teams 7-16) */
 .second-block,
 .third-block {
-  background: linear-gradient(135deg, #0B1E3A 0%, #2a0000 100%);
+  background: linear-gradient(135deg, #0B1E3A 0%, #020617 100%);
   border: 2px solid #1E40AF;
   border-radius: 0;
   padding: 0;
