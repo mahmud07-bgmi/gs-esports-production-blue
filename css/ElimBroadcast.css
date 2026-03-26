@@ -8,14 +8,14 @@
   src: url('../font/American Captain Patrius 02 FRE.otf');
 }
 
-/* 🎨 NEW THEME */
+/* 🎨 THEME COLORS */
 :root {
-  --bg-dark: #0A0F1F;
-  --bg-light: #1A0F2E;
-  --accent: #8B5CF6;      /* Purple */
-  --accent-glow: #22D3EE; /* Neon Cyan */
+  --bg-dark: #0A1630;
+  --bg-light: #0B1E3A;
+  --accent: #33ccff;
+  --accent-dark: #1E40AF;
   --gold: #FFD700;
-  --text: #E2E8F0;
+  --text: #E5E7EB;
 }
 
 body {
@@ -36,25 +36,24 @@ body {
 /* 🔥 MAIN CARD */
 .elim-card {
   width: 520px;
-  border-radius: 16px;
-  border: 2px solid var(--accent-glow);
+  border-radius: 14px;
+  border: 2px solid var(--gold);
   background: linear-gradient(135deg, var(--bg-light), var(--bg-dark));
   overflow: hidden;
   animation: slideIn .7s ease forwards;
-  box-shadow: 
-    0 0 15px rgba(139, 92, 246, 0.4),
-    0 0 30px rgba(34, 211, 238, 0.2);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
   position: relative;
 }
 
-/* ✨ GLOW LINE */
+/* ✨ TOP GLOW LINE */
 .elim-card::before {
   content: "";
   position: absolute;
   top: 0;
+  left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 
 /* 📦 CONTENT */
@@ -65,29 +64,29 @@ body {
   gap: 20px;
 }
 
-/* 🖼️ LOGO */
+/* 🖼️ TEAM LOGO */
 .team-logo {
   width: 110px;
   height: 110px;
   object-fit: contain;
-  border-radius: 12px;
-  border: 2px solid var(--accent);
-  background: #020617;
-  box-shadow: 0 0 12px rgba(34, 211, 238, 0.4);
+  border-radius: 10px;
+  border: 3px solid var(--gold);
+  background: #0F172A;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
 }
 
-/* 📝 TEXT */
+/* 📝 TEXT AREA */
 .text-content {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-/* 🚫 ELIM TEXT */
+/* 🚫 ELIMINATED TEXT */
 .eliminated-text {
   font-family: 'AmericanCaptain';
   font-size: 18px;
-  color: var(--accent-glow);
+  color: var(--accent);
   letter-spacing: 3px;
   text-transform: uppercase;
 }
@@ -97,9 +96,7 @@ body {
   font-size: 28px;
   font-weight: 900;
   color: var(--gold);
-  text-shadow: 
-    0 0 6px rgba(255, 215, 0, 0.6),
-    0 0 12px rgba(255, 215, 0, 0.4);
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
 }
 
 /* 💀 FINISHES */
@@ -120,11 +117,11 @@ body {
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateY(-80px) scale(0.95);
+    transform: translateY(-80px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
