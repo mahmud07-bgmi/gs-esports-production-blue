@@ -32,7 +32,7 @@ body {
   overflow: hidden;
   font-family: 'D-DINCondensed', 'MicrogrammaD', sans-serif;
   position: relative;
-  background: #EBF8FF;
+  background: linear-gradient(135deg, #020617, #0B1E3A, #0F2A5C);
 }
 
 /* Video Background */
@@ -119,7 +119,7 @@ body {
 .title-underline {
   width: 300px;
   height: 4px;
-  background: linear-gradient(90deg, #0284C7, #0EA5E9, #0284C7);
+  background: linear-gradient(90deg, #22D3EE, #3B82F6, #22D3EE);
   border-radius: 2px;
   margin: 0 auto;
   box-shadow: 0 4px 15px rgba(2, 132, 199, 0.5);
@@ -150,7 +150,7 @@ body {
 
 /* Prize Card Base Styles */
 .prize-card, .reward-card {
-  background: linear-gradient(135deg, #38BDF8, #0284C7);
+  background: linear-gradient(135deg, #0F2A5C, #1E3A8A);
   border-radius: 15px;
   padding: 25px;
   display: flex;
@@ -158,7 +158,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 30px rgba(34, 211, 238, 0.25);
   transition: all 0.3s ease;
   opacity: 0;
   transform: translateY(30px);
@@ -212,7 +212,7 @@ body {
 }
 
 .champion-section .prize-card {
-  background: linear-gradient(135deg, #0EA5E9, #0369A1);
+  background: linear-gradient(135deg, #1E3A8A, #020617);
   min-height: 140px;
   padding: 30px;
 }
@@ -360,7 +360,7 @@ body {
 }
 
 .other-rewards-section .reward-card {
-  background: linear-gradient(135deg, #0369A1, #075985);
+  background: linear-gradient(135deg, #0F2A5C, #020617);
   min-height: 95px;
   padding: 22px;
 }
