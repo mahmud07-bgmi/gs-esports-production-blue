@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Portal - BGMI Slot Overlay</title>
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">GS ADMIN</div>
+
+      <nav class="menu">
+        <a href="#" class="menu-item">Prize Pool</a>
+        <a href="#" class="menu-item">WWCD</a>
+        <a href="#" class="menu-item">Overall Result</a>
+        <a href="#" class="menu-item active">BGMI Slot Overlay</a>
+      </nav>
+
+      <div class="side-actions">
+        <button id="showBtn" class="action-btn show-btn">SHOW</button>
+        <button id="hideBtn" class="action-btn hide-btn">HIDE</button>
+      </div>
+
+      <div class="status-box">
+        <div>Selected Slot: <span id="selectedSlotText">-</span></div>
+        <div>Status: <span id="showStateText">Hidden</span></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <div class="topbar">
+        <h1>BGMI Slot Overlay</h1>
+      </div>
+
+      <div id="teamGrid" class="team-grid"></div>
+    </main>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
