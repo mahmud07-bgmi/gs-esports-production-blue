@@ -24,51 +24,13 @@ body {
 .brand {
   font-size: 30px;
   font-weight: 900;
-  margin-bottom: 36px;
+  margin-bottom: 30px;
 }
 
-.menu {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-bottom: 34px;
-}
-
-.menu-item {
-  color: rgba(255, 255, 255, 0.9);
-  text-decoration: none;
-  font-size: 20px;
-  padding: 10px 12px;
-  border-radius: 12px;
-}
-
-.menu-item.active {
-  background: rgba(22, 163, 255, 0.12);
-  color: #ffffff;
-}
-
-.side-actions {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 24px;
-}
-
-.action-btn {
-  border: 0;
-  border-radius: 12px;
-  padding: 12px 18px;
-  font-size: 14px;
-  font-weight: 900;
-  color: #fff;
-  cursor: pointer;
-}
-
-.show-btn {
-  background: #16a34a;
-}
-
-.hide-btn {
-  background: #dc2626;
+.menu-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 26px;
 }
 
 .status-box {
