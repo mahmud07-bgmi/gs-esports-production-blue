@@ -1,16 +1,16 @@
 const SHEET_ID = "1gyzPFtG3ubxzrqGEtQI-dr4aiExDU6Fx0tzFS2W4iG8";
-const REFRESH_MS = 2000;
+const STORAGE_KEY = "bgmi_slot_overlay_state";
+const REFRESH_MS = 500;
 
 const TEAMS_URL =
   `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=Teams&tqx=out:json`;
-
-const CONTROL_URL =
-  `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=Control&tqx=out:json`;
 
 const teamCard = document.getElementById("teamCard");
 const bgImg = document.getElementById("bgImg");
 const teamLogo = document.getElementById("teamLogo");
 const teamName = document.getElementById("teamName");
+
+let teams = [];
 
 function safeValue(cell) {
   return cell && cell.v !== null && cell.v !== undefined ? cell.v : "";
@@ -33,60 +33,57 @@ function getBgBySlot(slot) {
   return `assets/${slot}.png`;
 }
 
-async function getRows(url) {
-  const res = await fetch(url, { cache: "no-store" });
-  const text = await res.text();
-  const json = parseGViz(text);
-  return json.table.rows || [];
-}
-
-async function loadOverlay() {
+function getOverlayState() {
   try {
-    const [teamsRows, controlRows] = await Promise.all([
-      getRows(TEAMS_URL),
-      getRows(CONTROL_URL)
-    ]);
-
-    if (!controlRows.length) {
-      teamCard.classList.add("hidden");
-      return;
-    }
-
-    const controlRow = controlRows[0];
-    const selectedSlot = numberValue(controlRow.c[0], 0);
-    const show = textValue(controlRow.c[1]);
-
-    if (show !== "1" || selectedSlot < 1) {
-      teamCard.classList.add("hidden");
-      return;
-    }
-
-    const selectedTeam = teamsRows.find(row => numberValue(row.c[0], 0) === selectedSlot);
-
-    if (!selectedTeam) {
-      teamCard.classList.add("hidden");
-      return;
-    }
-
-    const name = textValue(selectedTeam.c[1]);
-    const logo = textValue(selectedTeam.c[3]);
-
-    teamName.textContent = name || `SLOT ${selectedSlot}`;
-    teamLogo.src = logo || "";
-    bgImg.src = getBgBySlot(selectedSlot);
-
-    if (logo) {
-      teamLogo.style.display = "block";
-    } else {
-      teamLogo.style.display = "none";
-    }
-
-    teamCard.classList.remove("hidden");
-  } catch (err) {
-    console.error("Overlay load failed:", err);
-    teamCard.classList.add("hidden");
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+  } catch {
+    return {};
   }
 }
 
-loadOverlay();
-setInterval(loadOverlay, REFRESH_MS);
+async function loadTeams() {
+  const res = await fetch(TEAMS_URL, { cache: "no-store" });
+  const text = await res.text();
+  const json = parseGViz(text);
+  teams = json.table.rows || [];
+}
+
+function renderOverlay() {
+  const state = getOverlayState();
+  const selectedSlot = Number(state.selectedSlot || 0);
+
+  if (!selectedSlot) {
+    teamCard.classList.add("hidden");
+    return;
+  }
+
+  const selectedTeam = teams.find(row => numberValue(row.c[0], 0) === selectedSlot);
+
+  if (!selectedTeam) {
+    teamCard.classList.add("hidden");
+    return;
+  }
+
+  const name = textValue(selectedTeam.c[1]);
+  const logo = textValue(selectedTeam.c[3]);
+
+  teamName.textContent = name || `SLOT ${selectedSlot}`;
+  bgImg.src = getBgBySlot(selectedSlot);
+
+  if (logo) {
+    teamLogo.src = logo;
+    teamLogo.style.display = "block";
+  } else {
+    teamLogo.style.display = "none";
+    teamLogo.removeAttribute("src");
+  }
+
+  teamCard.classList.remove("hidden");
+}
+
+(async function init() {
+  await loadTeams();
+  renderOverlay();
+  window.addEventListener("storage", renderOverlay);
+  setInterval(renderOverlay, REFRESH_MS);
+})();
