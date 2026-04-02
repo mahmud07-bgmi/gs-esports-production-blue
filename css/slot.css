@@ -1,0 +1,127 @@
+:root {
+  --canvas-width: 1920px;
+  --canvas-height: 1080px;
+
+  --slot-width: 300px;
+  --slot-height: 58px;
+
+  --logo-box-width: 58px;
+  --logo-size: 42px;
+
+  --name-left: 72px;
+  --name-width: 210px;
+  --name-height: 35px;
+  --name-font-size: 18px;
+  --name-padding-left: 10px;
+  --name-letter-spacing: 0.2px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: var(--canvas-width);
+  height: var(--canvas-height);
+  overflow: hidden;
+  background: transparent;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#overlay {
+  position: relative;
+  width: var(--canvas-width);
+  height: var(--canvas-height);
+  background: transparent;
+}
+
+.slot {
+  position: absolute;
+  width: var(--slot-width);
+  height: var(--slot-height);
+  pointer-events: none;
+}
+
+.slot.hidden {
+  display: none;
+}
+
+.base-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 1;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.logo-wrap {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  width: var(--logo-box-width);
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.logo {
+  width: var(--logo-size);
+  height: var(--logo-size);
+  object-fit: contain;
+}
+
+.team-name {
+  position: absolute;
+  left: var(--name-left);
+  top: 8px;
+  width: var(--name-width);
+  height: var(--name-height);
+  display: flex;
+  align-items: center;
+  padding-left: var(--name-padding-left);
+  padding-right: 12px;
+  color: #111111;
+  font-weight: 900;
+  font-size: var(--name-font-size);
+  line-height: 1;
+  letter-spacing: var(--name-letter-spacing);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 3;
+}
+
+.top-left-badge {
+  position: absolute;
+  left: 0px;
+  top: 58px;
+  width: 118px;
+  height: 38px;
+  background: rgba(8, 10, 20, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 50;
+}
+
+.top-left-logo {
+  max-width: 82px;
+  max-height: 30px;
+  object-fit: contain;
+  transform-origin: center;
+}
+
+.rotate-0 { transform: rotate(0deg); }
+.rotate-90 { transform: rotate(90deg); }
+.rotate-180 { transform: rotate(180deg); }
+.rotate-270 { transform: rotate(270deg); }
