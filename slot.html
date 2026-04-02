@@ -1,112 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>BGMI Slots</title>
-
-<style>
-body {
-  margin: 0;
-  background: transparent;
-  overflow: hidden;
-}
-
-.slot {
-  position: absolute;
-  width: 300px;
-  height: 60px;
-}
-
-.slot img.bg {
-  width: 100%;
-}
-
-.logo {
-  position: absolute;
-  left: 10px;
-  top: 8px;
-  width: 40px;
-  height: 40px;
-}
-
-.name {
-  position: absolute;
-  left: 60px;
-  top: 15px;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-/* top left logo */
-.top-logo {
-  position: absolute;
-  top: 50px;
-  left: 0;
-  width: 120px;
-}
-</style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, initial-scale=1.0" />
+  <title>BGMI Slot Overlay</title>
+  <link rel="stylesheet" href="css/slot.css" />
 </head>
 <body>
+  <div id="overlay"></div>
 
-<div id="container"></div>
+  <div class="top-left-badge">
+    <img id="topLeftLogo" class="top-left-logo rotate-0" src="" alt="">
+  </div>
 
-<img id="topLogo" class="top-logo" />
-
-<script>
-const SHEET_ID = "1gyzPFtG3ubxzrqGEtQI-dr4aiExDU6Fx0tzFS2W4iG8";
-const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
-
-const positions = [
-  [100,100],[450,100],[800,100],[1150,100],[1500,100],
-  [100,200],[450,200],[800,200],[1150,200],[1500,200],
-  [100,300],[450,300],[800,300],[1150,300],[1500,300],
-  [100,400],[450,400],[800,400],[1150,400],[1500,400],
-  [100,500],[450,500],[800,500],[1150,500],[1500,500]
-];
-
-function load() {
- fetch(URL)
-  .then(res=>res.text())
-  .then(text=>{
-    const json = JSON.parse(text.substring(47).slice(0,-2));
-    const rows = json.table.rows;
-
-    const container = document.getElementById("container");
-    container.innerHTML = "";
-
-    rows.forEach(row=>{
-      const slot = row.c[0]?.v;
-      const name = row.c[1]?.v;
-      const logo = row.c[3]?.v;
-
-      if(!slot) return;
-
-      const div = document.createElement("div");
-      div.className = "slot";
-      div.style.left = positions[slot-1][0]+"px";
-      div.style.top = positions[slot-1][1]+"px";
-
-      div.innerHTML = `
-        <img class="bg" src="assets/${slot}.png">
-        <img class="logo" src="${logo}">
-        <div class="name">${name}</div>
-      `;
-
-      container.appendChild(div);
-
-      // 🔥 TOP LEFT LOGO (slot 23)
-      if(slot == 23){
-        document.getElementById("topLogo").src = logo;
-      }
-    });
-
-  });
-}
-
-load();
-setInterval(load, 3000);
-</script>
-
+  <script src="js/slot.js"></script>
 </body>
 </html>
