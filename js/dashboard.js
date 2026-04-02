@@ -1,17 +1,13 @@
 const SHEET_ID = "1gyzPFtG3ubxzrqGEtQI-dr4aiExDU6Fx0tzFS2W4iG8";
-const APPS_SCRIPT_URL = "PASTE_YOUR_APPS_SCRIPT_WEBAPP_URL_HERE";
+const STORAGE_KEY = "bgmi_slot_overlay_state";
 
 const TEAMS_URL =
   `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=Teams&tqx=out:json`;
 
 const teamGrid = document.getElementById("teamGrid");
 const selectedSlotText = document.getElementById("selectedSlotText");
-const showStateText = document.getElementById("showStateText");
-const showBtn = document.getElementById("showBtn");
-const hideBtn = document.getElementById("hideBtn");
 
 let selectedSlot = null;
-let visibleState = false;
 let currentRows = [];
 
 function safeValue(cell) {
@@ -31,6 +27,24 @@ function parseGViz(text) {
   return JSON.parse(text.substring(47).slice(0, -2));
 }
 
+function saveOverlayState(slot) {
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify({
+      selectedSlot: slot
+    })
+  );
+}
+
+function loadOverlayState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    selectedSlot = saved.selectedSlot ?? null;
+  } catch {
+    selectedSlot = null;
+  }
+}
+
 async function loadTeams() {
   const res = await fetch(TEAMS_URL, { cache: "no-store" });
   const text = await res.text();
@@ -40,7 +54,6 @@ async function loadTeams() {
 
 function updateStatus() {
   selectedSlotText.textContent = selectedSlot ?? "-";
-  showStateText.textContent = visibleState ? "Visible" : "Hidden";
 }
 
 function renderCards(rows) {
@@ -64,6 +77,7 @@ function renderCards(rows) {
 
     card.addEventListener("click", () => {
       selectedSlot = slot;
+      saveOverlayState(slot);
       updateStatus();
       renderCards(currentRows);
     });
@@ -72,47 +86,8 @@ function renderCards(rows) {
   });
 }
 
-async function sendControl(slot, show) {
-  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === "PASTE_YOUR_APPS_SCRIPT_WEBAPP_URL_HERE") {
-    alert("Apps Script URL daalo pehle.");
-    return;
-  }
-
-  await fetch(APPS_SCRIPT_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
-    },
-    body: JSON.stringify({
-      selected_slot: slot,
-      show: show
-    })
-  });
-}
-
-showBtn.addEventListener("click", async () => {
-  if (!selectedSlot) {
-    alert("Pehle team card pe click karo.");
-    return;
-  }
-
-  visibleState = true;
-  updateStatus();
-  await sendControl(selectedSlot, 1);
-});
-
-hideBtn.addEventListener("click", async () => {
-  if (!selectedSlot) {
-    alert("Pehle team card pe click karo.");
-    return;
-  }
-
-  visibleState = false;
-  updateStatus();
-  await sendControl(selectedSlot, 0);
-});
-
 (async function init() {
+  loadOverlayState();
   currentRows = await loadTeams();
   renderCards(currentRows);
   updateStatus();
