@@ -1,6 +1,6 @@
 const SHEET_ID = "1gyzPFtG3ubxzrqGEtQI-dr4aiExDU6Fx0tzFS2W4iG8";
 const STORAGE_KEY = "bgmi_slot_overlay_state";
-const REFRESH_MS = 500;
+const REFRESH_MS = 1000;
 
 const TEAMS_URL =
   `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=Teams&tqx=out:json`;
@@ -12,6 +12,7 @@ const teamName = document.getElementById("teamName");
 
 let teams = [];
 
+// ---------- Helpers ----------
 function safeValue(cell) {
   return cell && cell.v !== null && cell.v !== undefined ? cell.v : "";
 }
@@ -33,6 +34,7 @@ function getBgBySlot(slot) {
   return `assets/${slot}.png`;
 }
 
+// ---------- State ----------
 function getOverlayState() {
   try {
     return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
@@ -41,25 +43,31 @@ function getOverlayState() {
   }
 }
 
+// ---------- Load Teams ----------
 async function loadTeams() {
-  const res = await fetch(TEAMS_URL, { cache: "no-store" });
-  const text = await res.text();
-  const json = parseGViz(text);
-  teams = json.table.rows || [];
+  try {
+    const res = await fetch(TEAMS_URL, { cache: "no-store" });
+    const text = await res.text();
+    const json = parseGViz(text);
+    teams = json.table.rows || [];
+  } catch (err) {
+    console.error("Sheet load error:", err);
+  }
 }
 
+// ---------- Render ----------
 function renderOverlay() {
   const state = getOverlayState();
-  const selectedSlot = Number(state.selectedSlot || 0);
 
-  if (!selectedSlot) {
-    teamCard.classList.add("hidden");
-    return;
-  }
+  // 🔥 OBS FIX → default slot = 1
+  const selectedSlot = Number(state.selectedSlot || 1);
 
-  const selectedTeam = teams.find(row => numberValue(row.c[0], 0) === selectedSlot);
+  const selectedTeam = teams.find(
+    row => numberValue(row.c[0], 0) === selectedSlot
+  );
 
   if (!selectedTeam) {
+    console.warn("Team not found for slot:", selectedSlot);
     teamCard.classList.add("hidden");
     return;
   }
@@ -67,23 +75,37 @@ function renderOverlay() {
   const name = textValue(selectedTeam.c[1]);
   const logo = textValue(selectedTeam.c[3]);
 
+  // Team Name
   teamName.textContent = name || `SLOT ${selectedSlot}`;
+
+  // Background (slot wise)
   bgImg.src = getBgBySlot(selectedSlot);
 
+  // Logo
   if (logo) {
     teamLogo.src = logo;
     teamLogo.style.display = "block";
   } else {
-    teamLogo.style.display = "none";
     teamLogo.removeAttribute("src");
+    teamLogo.style.display = "none";
   }
 
+  // Show card
   teamCard.classList.remove("hidden");
 }
 
-(async function init() {
+// ---------- Init ----------
+async function init() {
   await loadTeams();
   renderOverlay();
+
+  // OBS me kabhi-kabhi storage update detect nahi hota
   window.addEventListener("storage", renderOverlay);
-  setInterval(renderOverlay, REFRESH_MS);
-})();
+
+  // 🔁 Auto refresh (important for OBS)
+  setInterval(() => {
+    renderOverlay();
+  }, REFRESH_MS);
+}
+
+init();
