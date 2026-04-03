@@ -13,10 +13,7 @@ body {
   top: 0;
   width: 1920px;
   height: 1080px;
-}
-
-.hidden {
-  display: none;
+  display: block;
 }
 
 .bg-img {
@@ -29,7 +26,6 @@ body {
   display: block;
 }
 
-/* Logo ko apne background ke logo-box ke hisaab se set kiya hai */
 .logo-wrap {
   position: absolute;
   left: 520px;
@@ -48,7 +44,6 @@ body {
   display: block;
 }
 
-/* Team name ko background ke text area ke hisaab se set kiya hai */
 .team-name {
   position: absolute;
   left: 628px;
