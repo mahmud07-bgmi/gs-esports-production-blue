@@ -41,15 +41,25 @@ function renderTable(table, shouldShow) {
     );
 
   const srNoIdx = idx('sr_no');
+  const teamNameIdx = idx('team_name');
   const teamLogoIdx = idx('team_logo');
   const teamInitialIdx = idx('team_initial');
   const playersAliveIdx = idx('players_alive');
-  const finishPointsIdx = idx('finish_points'); // FIN
-  const totalPointsIdx = idx('total_points');   // TOT. PTS
+  const finishPointsIdx = idx('finish_points');
+  const totalPointsIdx = idx('total_points');
   const bluezoneIdx = idx('bluezone');
 
-  // Sort rows by total_points desc, then finish_points desc, then players_alive desc, then sr_no
-  const sortedRows = [...table.rows].sort((a, b) => {
+  // ✅ Only keep valid rows where sr_no exists and team data exists
+  const validRows = table.rows.filter(row => {
+    const srNo = String(row[srNoIdx] ?? '').trim();
+    const teamName = String(row[teamNameIdx] ?? '').trim();
+    const teamInitial = String(row[teamInitialIdx] ?? '').trim();
+
+    return srNo !== '' && !isNaN(Number(srNo)) && (teamName !== '' || teamInitial !== '');
+  });
+
+  // ✅ Sort only valid rows
+  const sortedRows = [...validRows].sort((a, b) => {
     const aTotal = parseInt(a[totalPointsIdx], 10) || 0;
     const bTotal = parseInt(b[totalPointsIdx], 10) || 0;
     if (bTotal !== aTotal) return bTotal - aTotal;
@@ -67,9 +77,9 @@ function renderTable(table, shouldShow) {
     return aRank - bRank;
   });
 
-  const displayRows = Array.from({ length: sortedRows.length }, (_, i) => ({
+  const displayRows = sortedRows.map((row, i) => ({
     rank: i + 1,
-    ...sortedRows[i],
+    data: row
   }));
 
   let html = `
@@ -87,15 +97,15 @@ function renderTable(table, shouldShow) {
   `;
 
   for (let i = 0; i < displayRows.length; i++) {
-    const row = displayRows[i];
+    const row = displayRows[i].data;
     const isBluezone = String(row[bluezoneIdx]).toLowerCase() === 'true';
 
     html += `<tr${isBluezone ? ' class="bluezone-blink"' : ''}>`;
-    html += `<td>${row.rank}</td>`;
-    html += `<td class="team"><img src="${row[teamLogoIdx] || ''}" alt="logo"><span>${row[teamInitialIdx] || ''}</span></td>`;
+    html += `<td>${displayRows[i].rank}</td>`;
+    html += `<td class="team"><img src="${row[teamLogoIdx] || ''}" alt="logo"><span>${row[teamInitialIdx] || row[teamNameIdx] || ''}</span></td>`;
     html += `<td>${createAliveRectangles(parseInt(row[playersAliveIdx], 10) || 0)}</td>`;
-    html += `<td>${row[finishPointsIdx] ?? 0}</td>`;
-    html += `<td>${row[totalPointsIdx] ?? 0}</td>`;
+    html += `<td>${parseInt(row[finishPointsIdx], 10) || 0}</td>`;
+    html += `<td>${parseInt(row[totalPointsIdx], 10) || 0}</td>`;
     html += `</tr>`;
   }
 
@@ -119,13 +129,27 @@ function renderTable(table, shouldShow) {
 function updateVisibility(table) {
   if (!table.headers.length || !table.rows.length) return true;
 
-  const playersAliveIdx = table.headers.findIndex(
-    h => String(h).toLowerCase().replace(/\s/g, '_') === 'players_alive'
-  );
+  const idx = key =>
+    table.headers.findIndex(
+      h => String(h).toLowerCase().replace(/\s/g, '_') === key
+    );
+
+  const srNoIdx = idx('sr_no');
+  const teamNameIdx = idx('team_name');
+  const teamInitialIdx = idx('team_initial');
+  const playersAliveIdx = idx('players_alive');
 
   if (playersAliveIdx === -1) return true;
 
-  const teamsWithPlayersAlive = table.rows.filter(row => {
+  const validRows = table.rows.filter(row => {
+    const srNo = String(row[srNoIdx] ?? '').trim();
+    const teamName = String(row[teamNameIdx] ?? '').trim();
+    const teamInitial = String(row[teamInitialIdx] ?? '').trim();
+
+    return srNo !== '' && !isNaN(Number(srNo)) && (teamName !== '' || teamInitial !== '');
+  });
+
+  const teamsWithPlayersAlive = validRows.filter(row => {
     const aliveCount = parseInt(row[playersAliveIdx], 10) || 0;
     return aliveCount > 0;
   }).length;
