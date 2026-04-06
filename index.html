@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <title>GS ESPORTS PRODUCTION</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #181a23;
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle at top, #0B1220, #05080F);
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -16,35 +17,52 @@
       min-height: 100vh;
       margin: 0;
     }
+
     h1 {
       margin-bottom: 32px;
+      font-size: 28px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(14,165,233,0.6);
     }
+
     .links {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 18px;
       width: 320px;
     }
+
     a {
       display: block;
-      background: #23263a;
-      color: #fff;
+      background: rgba(35, 38, 58, 0.6);
+      color: #ffffff;
       text-decoration: none;
-      padding: 20px;
-      border-radius: 12px;
-      font-size: 1.2em;
+      padding: 18px;
+      border-radius: 14px;
+      font-size: 1.1em;
       text-align: center;
-      transition: background 0.2s;
-      border: 2px solid #D94A70;
+      transition: all 0.3s ease;
+      border: 2px solid #0EA5E9;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 8px rgba(14,165,233,0.2);
     }
+
     a:hover {
-      background: #D94A70;
+      background: #0EA5E9;
       color: #fff;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 20px rgba(14,165,233,0.7);
+    }
+
+    a:active {
+      transform: scale(0.98);
     }
   </style>
 </head>
+
 <body>
   <h1>GS ESPORTS PRODUCTION</h1>
+
   <div class="links">
     <a href="AliveStatus.html">Alive Status Overlay</a>
     <a href="ElimBroadcast.html">Elimination Broadcast Overlay</a>
@@ -56,5 +74,6 @@
     <a href="PrizePool.html">Prize Pool Overlay</a>
     <a href="MVP.html">MVP Overlay</a>
   </div>
+
 </body>
-</html> 
+</html>
